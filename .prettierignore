@@ -6,3 +6,4 @@ dist
 *.yml
 # Ignore all HTML files:
 *.html
+*.md
