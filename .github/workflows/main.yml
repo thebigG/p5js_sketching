@@ -46,6 +46,8 @@ jobs:
   Deploy:
     permissions:
       pull-requests: write
+      contents: write
+      repository-projects: write
     runs-on: ubuntu-latest
     container:
       image: thebigg1/p5js_sketching:latest
