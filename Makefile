@@ -11,5 +11,6 @@ build_image:
 	docker build . -t p5js_sketching:p5js_sketching
 
 clean:
+	- rm -r build
 	- rm -r node_modules || true
 	- rm -r dist || true
