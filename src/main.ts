@@ -103,12 +103,43 @@ function arcs() {
   new p5(sketch);
 }
 
+function arrow() {
+  var sketch = (p5: p5) => {
+    // The sketch setup method
+    p5.setup = () => {
+      // Creating and positioning the canvas
+      const canvas = p5.createCanvas(480, 120);
+    };
+
+    // The sketch draw method
+    p5.draw = () => {
+      // DEMO: Let the circle instances draw themselves
+      p5.background(204);
+      p5.beginShape();
+      p5.vertex(180, 82);
+      p5.vertex(207, 36);
+      p5.vertex(214, 63);
+      p5.vertex(407, 11);
+      p5.vertex(412, 30);
+      p5.vertex(219, 82);
+      p5.vertex(226, 109);
+
+      // p5.vertex();
+      p5.endShape();
+      // p5.ellipse(50, 50, 80, 80);
+    };
+  };
+
+  new p5(sketch);
+}
+
 function main(): void {
   circle();
   circleAndMouse();
   line();
   triangle();
   arcs();
+  arrow();
 }
 
 main();
