@@ -93,7 +93,7 @@ function arcs() {
     p5.draw = () => {
       // DEMO: Let the circle instances draw themselves
       p5.background(204);
-      p5.fill("purple");
+      p5.fill("green");
       p5.arc(50, 50, 80, 80, 0, p5.PI / 2);
       p5.arc(100, 100, 80, 80, 0, p5.PI / 2);
       // p5.ellipse(50, 50, 80, 80);
