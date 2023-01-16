@@ -81,11 +81,34 @@ function triangle() {
   new p5(sketch);
 }
 
+function arcs() {
+  var sketch = (p5: p5) => {
+    // The sketch setup method
+    p5.setup = () => {
+      // Creating and positioning the canvas
+      const canvas = p5.createCanvas(200, 200);
+    };
+
+    // The sketch draw method
+    p5.draw = () => {
+      // DEMO: Let the circle instances draw themselves
+      p5.background(204);
+      p5.fill("purple");
+      p5.arc(50, 50, 80, 80, 0, p5.PI / 2);
+      p5.arc(100, 100, 80, 80, 0, p5.PI / 2);
+      // p5.ellipse(50, 50, 80, 80);
+    };
+  };
+
+  new p5(sketch);
+}
+
 function main(): void {
   circle();
   circleAndMouse();
   line();
   triangle();
+  arcs();
 }
 
 main();
