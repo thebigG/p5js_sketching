@@ -44,6 +44,7 @@ jobs:
 #          path: bin/*
 #          retention-days: 14
   Deploy:
+    needs: build
     permissions:
       pull-requests: write
       contents: write
