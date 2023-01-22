@@ -16,7 +16,7 @@ function circle() {
     };
   };
 
-  new p5(sketch);
+  return sketch;
 }
 
 function circleAndMouse() {
@@ -35,7 +35,7 @@ function circleAndMouse() {
     };
   };
 
-  new p5(sketch);
+  return sketch;
 }
 
 function line() {
@@ -54,7 +54,7 @@ function line() {
     };
   };
 
-  new p5(sketch);
+  return sketch;
 }
 
 function triangle() {
@@ -78,7 +78,7 @@ function triangle() {
     };
   };
 
-  new p5(sketch);
+  return sketch;
 }
 
 function arcs() {
@@ -100,7 +100,7 @@ function arcs() {
     };
   };
 
-  new p5(sketch);
+  return sketch;
 }
 
 function arrow() {
@@ -130,7 +130,7 @@ function arrow() {
     };
   };
 
-  new p5(sketch);
+  return sketch;
 }
 
 function dinosaurs() {
@@ -146,30 +146,24 @@ function dinosaurs() {
       // DEMO: Let the circle instances draw themselves
       p5.background(204);
       p5.beginShape();
-      p5.vertex(180, 82);
-      p5.vertex(207, 36);
-      p5.vertex(214, 63);
-      p5.vertex(407, 11);
-      p5.vertex(412, 30);
-      p5.vertex(219, 82);
-      p5.vertex(226, 109);
-
+      p5.vertex(50, 120);
+      p5.vertex(100, 90);
       // p5.vertex();
       p5.endShape();
       // p5.ellipse(50, 50, 80, 80);
     };
   };
 
-  new p5(sketch);
+  return sketch;
 }
 
 function main(): void {
-  circle();
-  circleAndMouse();
-  line();
-  triangle();
-  arcs();
-  arrow();
+  new p5(circle());
+  new p5(circleAndMouse());
+  new p5(line());
+  new p5(triangle());
+  new p5(arcs());
+  new p5(arrow());
   // dinosaurs();
 }
 
