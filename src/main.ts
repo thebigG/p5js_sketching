@@ -146,11 +146,21 @@ function dinosaurs() {
       // DEMO: Let the circle instances draw themselves
       p5.background(204);
       p5.beginShape();
+      p5.noFill();
+      p5.fill("white");
       p5.vertex(50, 120);
       p5.vertex(100, 90);
+      p5.vertex(110, 60);
+      p5.vertex(80, 20);
+      p5.vertex(210, 60);
+      p5.vertex(160, 80);
+      p5.vertex(200, 90);
+      p5.vertex(140, 100);
+      p5.vertex(130, 120);
       // p5.vertex();
-      p5.endShape();
-      // p5.ellipse(50, 50, 80, 80);
+      p5.endShape(p5.CLOSE);
+      p5.fill(0);
+      p5.ellipse(155, 60, 8, 8);
     };
   };
 
@@ -158,13 +168,13 @@ function dinosaurs() {
 }
 
 function main(): void {
-  new p5(circle());
-  new p5(circleAndMouse());
-  new p5(line());
-  new p5(triangle());
-  new p5(arcs());
-  new p5(arrow());
-  // dinosaurs();
+  // new p5(circle());
+  // new p5(circleAndMouse());
+  // new p5(line());
+  // new p5(triangle());
+  // new p5(arcs());
+  // new p5(arrow());
+  new p5(dinosaurs());
 }
 
 main();
