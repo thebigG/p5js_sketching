@@ -17,4 +17,5 @@ COPY . /p5js_sketching
 RUN cd /p5js_sketching && npm install
 RUN cd /p5js_sketching && make check-format
 RUN cd /p5js_sketching && make build
+RUN cd /p5js_sketching && make test
 

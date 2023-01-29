@@ -10,6 +10,9 @@ format:
 build_image: 
 	docker build . -t p5js_sketching:p5js_sketching
 
+make test:
+	npx jest
+
 clean:
 	- rm -r build
 	- rm -r node_modules || true
