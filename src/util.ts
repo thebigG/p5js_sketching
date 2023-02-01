@@ -39,13 +39,32 @@ export class Vector2 {
     this.y = Math.sin(angle) * length;
   }
 
-  public getAngle() {
-    Math.atan2(this.y, this.x);
+  public getAngle(): number {
+    return Math.atan2(this.y, this.x);
   }
 
   public getLength(): number {
     return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
   }
 
-  public add() {}
+  public setLength(length: number) {
+    let angle = this.getAngle();
+    this.x = Math.cos(angle) * length;
+    this.y = Math.sin(angle) * length;
+  }
+
+  public add(v2: Vector2): Vector2 {
+    return new Vector2(this.getX() + v2.getX(), this.getY() + v2.getY());
+  }
+
+  public substract(v2: Vector2): Vector2 {
+    return new Vector2(this.getX() - v2.getX(), this.getY() - v2.getY());
+  }
+  public multiply(scalar: number): Vector2 {
+    return new Vector2(this.getX() * scalar, this.getY() * scalar);
+  }
+
+  public divide(scalar: number): Vector2 {
+    return new Vector2(this.getX() / scalar, this.getY() / scalar);
+  }
 }
