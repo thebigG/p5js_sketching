@@ -1,4 +1,5 @@
-import p5 from "p5";
+import p5, { Vector } from "p5";
+import { Particle2, Vector2 } from "./util";
 
 function circle() {
   var sketch = (p5: p5) => {
@@ -309,6 +310,33 @@ function robot() {
   return sketch;
 }
 
+function particle() {
+  var sketch = (p5: p5) => {
+    // The sketch setup method
+    let position = new Vector2(50, 50);
+    let particle_obj = new Particle2(position, 4, p5.PI / 6);
+    p5.setup = () => {
+      // Creating and positioning the canvas
+      const canvas = p5.createCanvas(800, 800);
+    };
+
+    // The sketch draw method
+    p5.draw = () => {
+      // DEMO: Let the circle instances draw themselves
+      p5.background(204);
+      particle_obj.update();
+      p5.ellipse(
+        particle_obj.position.getX(),
+        particle_obj.position.getY(),
+        80,
+        80
+      );
+    };
+  };
+
+  return sketch;
+}
+
 function main(): void {
   // new p5(circle());
   // new p5(circleAndMouse());
@@ -317,7 +345,8 @@ function main(): void {
   // new p5(arcs());
   // new p5(arrow());
   // new p5(robot());
-  new p5(robotAndMouse());
+  // new p5(robotAndMouse());
+  new p5(particle());
 }
 
 main();
