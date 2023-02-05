@@ -6,7 +6,7 @@
     "removeComments": true,
     "rootDir": "./src/",
     "sourceMap": true,
-    "target": "es5",
+    "target": "es6",
     "outDir": "build",
     "moduleResolution": "node",
     "esModuleInterop": true

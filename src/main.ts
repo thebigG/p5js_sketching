@@ -2,11 +2,13 @@ import p5, { Vector } from "p5";
 import { Particle2, Vector2 } from "./util";
 
 function circle() {
+  let canvas_id = arguments.callee.name;
   var sketch = (p5: p5) => {
     // The sketch setup method
     p5.setup = () => {
       // Creating and positioning the canvas
-      const canvas = p5.createCanvas(200, 200);
+      let canvas = p5.createCanvas(200, 200);
+      canvas.id(canvas_id);
     };
 
     // The sketch draw method
@@ -21,11 +23,13 @@ function circle() {
 }
 
 function circleAndMouse() {
+  let canvas_id = arguments.callee.name;
   var sketch = (p5: p5) => {
     // The sketch setup method
     p5.setup = () => {
       // Creating and positioning the canvas
       const canvas = p5.createCanvas(200, 200);
+      canvas.id(canvas_id);
     };
 
     // The sketch draw method
@@ -40,11 +44,13 @@ function circleAndMouse() {
 }
 
 function line() {
+  let canvas_id = arguments.callee.name;
   var sketch = (p5: p5) => {
     // The sketch setup method
     p5.setup = () => {
       // Creating and positioning the canvas
       const canvas = p5.createCanvas(200, 200);
+      canvas.id(canvas_id);
     };
 
     // The sketch draw method
@@ -59,11 +65,13 @@ function line() {
 }
 
 function triangle() {
+  let canvas_id = arguments.callee.name;
   var sketch = (p5: p5) => {
     // The sketch setup method
     p5.setup = () => {
       // Creating and positioning the canvas
       const canvas = p5.createCanvas(100, 100);
+      canvas.id(canvas_id);
     };
 
     // The sketch draw method
@@ -83,11 +91,13 @@ function triangle() {
 }
 
 function arcs() {
+  let canvas_id = arguments.callee.name;
   var sketch = (p5: p5) => {
     // The sketch setup method
     p5.setup = () => {
       // Creating and positioning the canvas
       const canvas = p5.createCanvas(200, 200);
+      canvas.id(canvas_id);
     };
 
     // The sketch draw method
@@ -105,11 +115,13 @@ function arcs() {
 }
 
 function arrow() {
+  let canvas_id = arguments.callee.name;
   var sketch = (p5: p5) => {
     // The sketch setup method
     p5.setup = () => {
       // Creating and positioning the canvas
       const canvas = p5.createCanvas(480, 120);
+      canvas.id(canvas_id);
     };
 
     // The sketch draw method
@@ -135,11 +147,13 @@ function arrow() {
 }
 
 function dinosaurs() {
+  let canvas_id = arguments.callee.name;
   var sketch = (p5: p5) => {
     // The sketch setup method
     p5.setup = () => {
       // Creating and positioning the canvas
       const canvas = p5.createCanvas(480, 120);
+      canvas.id(canvas_id);
     };
 
     // The sketch draw method
@@ -169,6 +183,7 @@ function dinosaurs() {
 }
 
 function robotAndMouse() {
+  let canvas_id = arguments.callee.name;
   var sketch = (p5: p5) => {
     // The sketch setup method
     // let outer_ciircle_X =
@@ -190,6 +205,7 @@ function robotAndMouse() {
     p5.setup = () => {
       // Creating and positioning the canvas
       const canvas = p5.createCanvas(720, 480);
+      canvas.id(canvas_id);
       p5.strokeWeight(2);
       p5.angleMode(p5.RADIANS);
       p5.ellipseMode(p5.RADIUS);
@@ -253,17 +269,21 @@ function robotAndMouse() {
       p5.ellipse(296, 130, 4, 4);
       p5.ellipse(305, 162, 3, 3);
     };
+
+    function getCanvas() {}
   };
 
   return sketch;
 }
 
 function robot() {
+  let canvas_id = arguments.callee.name;
   var sketch = (p5: p5) => {
     // The sketch setup method
     p5.setup = () => {
       // Creating and positioning the canvas
       const canvas = p5.createCanvas(720, 480);
+      canvas.id(canvas_id);
       p5.strokeWeight(2);
       p5.ellipseMode(p5.RADIUS);
     };
@@ -311,6 +331,7 @@ function robot() {
 }
 
 function particle() {
+  let canvas_id = arguments.callee.name;
   var sketch = (p5: p5) => {
     // The sketch setup method
     let position = new Vector2(50, 50);
@@ -318,6 +339,7 @@ function particle() {
     p5.setup = () => {
       // Creating and positioning the canvas
       const canvas = p5.createCanvas(800, 800);
+      canvas.id(canvas_id);
     };
 
     // The sketch draw method
@@ -337,16 +359,48 @@ function particle() {
   return sketch;
 }
 
+let drawings = new Map<string, (...args: any[]) => any>();
+
+function selector(p: p5) {
+  let sel: any;
+  let lastShown: p5;
+  p.setup = function () {
+    p.textAlign(p.CENTER);
+    p.background(200);
+    sel = p.createSelect();
+    sel.position(10, 10);
+    for (let d of drawings) {
+      sel.option(d[0]);
+    }
+
+    let firstSelected = drawings.keys().next().value;
+    sel.selected(firstSelected);
+
+    lastShown = new p5(drawings.get(firstSelected)());
+
+    sel.changed(() => {
+      let item = sel.value();
+      if (lastShown != undefined) {
+        lastShown.remove();
+      }
+      lastShown = new p5(drawings.get(item)());
+    });
+  };
+}
+
 function main(): void {
-  // new p5(circle());
-  // new p5(circleAndMouse());
-  // new p5(line());
-  // new p5(triangle());
-  // new p5(arcs());
-  // new p5(arrow());
-  // new p5(robot());
-  // new p5(robotAndMouse());
-  new p5(particle());
+  // let drawings = new Map<string, p5>();
+  drawings.set("circle", circle);
+  drawings.set("circleAndMouse", circleAndMouse);
+  drawings.set("triangle", triangle);
+  drawings.set("arcs", arcs);
+  drawings.set("line", line);
+  drawings.set("arrow", arrow);
+  drawings.set("robot", robot);
+  drawings.set("robotAndMouse", robotAndMouse);
+  drawings.set("particle", particle);
+
+  new p5(selector);
 }
 
 main();
