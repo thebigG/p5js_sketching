@@ -2,7 +2,7 @@ import p5, { Vector } from "p5";
 import { Particle2, Vector2 } from "./util";
 
 function circle() {
-  let canvas_id = arguments.callee.name;
+  let canvas_id = "circle";
   var sketch = (p5: p5) => {
     // The sketch setup method
     p5.setup = () => {
@@ -23,7 +23,7 @@ function circle() {
 }
 
 function circleAndMouse() {
-  let canvas_id = arguments.callee.name;
+  let canvas_id = "circleAndMouse";
   var sketch = (p5: p5) => {
     // The sketch setup method
     p5.setup = () => {
@@ -44,7 +44,7 @@ function circleAndMouse() {
 }
 
 function line() {
-  let canvas_id = arguments.callee.name;
+  let canvas_id = "line";
   var sketch = (p5: p5) => {
     // The sketch setup method
     p5.setup = () => {
@@ -65,7 +65,7 @@ function line() {
 }
 
 function triangle() {
-  let canvas_id = arguments.callee.name;
+  let canvas_id = "triangle";
   var sketch = (p5: p5) => {
     // The sketch setup method
     p5.setup = () => {
@@ -91,7 +91,7 @@ function triangle() {
 }
 
 function arcs() {
-  let canvas_id = arguments.callee.name;
+  let canvas_id = "arcs";
   var sketch = (p5: p5) => {
     // The sketch setup method
     p5.setup = () => {
@@ -115,7 +115,7 @@ function arcs() {
 }
 
 function arrow() {
-  let canvas_id = arguments.callee.name;
+  let canvas_id = "arrow";
   var sketch = (p5: p5) => {
     // The sketch setup method
     p5.setup = () => {
@@ -147,7 +147,7 @@ function arrow() {
 }
 
 function dinosaurs() {
-  let canvas_id = arguments.callee.name;
+  let canvas_id = "dinosaurs";
   var sketch = (p5: p5) => {
     // The sketch setup method
     p5.setup = () => {
@@ -183,7 +183,7 @@ function dinosaurs() {
 }
 
 function robotAndMouse() {
-  let canvas_id = arguments.callee.name;
+  let canvas_id = "robotAndMouse";
   var sketch = (p5: p5) => {
     // The sketch setup method
     // let outer_ciircle_X =
@@ -269,15 +269,13 @@ function robotAndMouse() {
       p5.ellipse(296, 130, 4, 4);
       p5.ellipse(305, 162, 3, 3);
     };
-
-    function getCanvas() {}
   };
 
   return sketch;
 }
 
 function robot() {
-  let canvas_id = arguments.callee.name;
+  let canvas_id = "robot";
   var sketch = (p5: p5) => {
     // The sketch setup method
     p5.setup = () => {
@@ -331,7 +329,7 @@ function robot() {
 }
 
 function particle() {
-  let canvas_id = arguments.callee.name;
+  let canvas_id = "particle";
   var sketch = (p5: p5) => {
     // The sketch setup method
     let position = new Vector2(50, 50);
@@ -398,6 +396,7 @@ function main(): void {
   drawings.set("arrow", arrow);
   drawings.set("robot", robot);
   drawings.set("robotAndMouse", robotAndMouse);
+  drawings.set("dinosaurs", dinosaurs);
   drawings.set("particle", particle);
 
   new p5(selector);
