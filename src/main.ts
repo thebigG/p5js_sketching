@@ -332,11 +332,15 @@ function particle() {
   let canvas_id = "particle";
   var sketch = (p5: p5) => {
     // The sketch setup method
-    let position = new Vector2(50, 50);
-    let particle_obj = new Particle2(position, 4, p5.PI / 6);
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    let position = new Vector2(50, height);
+    let particle_obj = new Particle2(position, 10, -p5.PI / 2);
+
+    let accel = new Vector2(0.1, 0.1);
     p5.setup = () => {
       // Creating and positioning the canvas
-      const canvas = p5.createCanvas(800, 800);
+      const canvas = p5.createCanvas(width, height);
       canvas.id(canvas_id);
     };
 
@@ -344,6 +348,7 @@ function particle() {
     p5.draw = () => {
       // DEMO: Let the circle instances draw themselves
       p5.background(204);
+      particle_obj.accelerate(accel);
       particle_obj.update();
       p5.ellipse(
         particle_obj.position.getX(),
@@ -387,7 +392,6 @@ function selector(p: p5) {
 }
 
 function main(): void {
-  // let drawings = new Map<string, p5>();
   drawings.set("circle", circle);
   drawings.set("circleAndMouse", circleAndMouse);
   drawings.set("triangle", triangle);

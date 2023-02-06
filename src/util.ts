@@ -103,6 +103,10 @@ export class Particle2 {
     this.velocity.setAngle(direction);
   }
 
+  accelerate(accel: Vector2) {
+    this.velocity.addTo(accel);
+  }
+
   update() {
     this.position.addTo(this.velocity);
   }
