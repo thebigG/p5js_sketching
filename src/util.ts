@@ -95,12 +95,19 @@ export class Vector2 {
 export class Particle2 {
   position: Vector2;
   velocity: Vector2;
+  gravity: Vector2;
 
-  constructor(position: Vector2, speed: number, direction: number) {
+  constructor(
+    position: Vector2,
+    speed: number,
+    direction: number,
+    grav: number = 0
+  ) {
     this.position = new Vector2(position.getX(), position.getY());
     this.velocity = new Vector2(0, 0);
     this.velocity.setLength(speed);
     this.velocity.setAngle(direction);
+    this.gravity = new Vector2(0, grav);
   }
 
   accelerate(accel: Vector2) {
@@ -108,6 +115,7 @@ export class Particle2 {
   }
 
   update() {
+    this.velocity.addTo(this.gravity);
     this.position.addTo(this.velocity);
   }
 }

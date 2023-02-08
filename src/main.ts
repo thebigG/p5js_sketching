@@ -362,6 +362,38 @@ function particle() {
   return sketch;
 }
 
+function gravityParticle() {
+  let canvas_id = "gravityParticle";
+  var sketch = (p5: p5) => {
+    // The sketch setup method
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    let position = new Vector2(50, height);
+    let particle_obj = new Particle2(position, 10, -p5.PI / 2, 0.1);
+
+    p5.setup = () => {
+      // Creating and positioning the canvas
+      const canvas = p5.createCanvas(width, height);
+      canvas.id(canvas_id);
+    };
+
+    // The sketch draw method
+    p5.draw = () => {
+      // DEMO: Let the circle instances draw themselves
+      p5.background(204);
+      particle_obj.update();
+      p5.ellipse(
+        particle_obj.position.getX(),
+        particle_obj.position.getY(),
+        80,
+        80
+      );
+    };
+  };
+
+  return sketch;
+}
+
 let drawings = new Map<string, (...args: any[]) => any>();
 
 function selector(p: p5) {
@@ -402,6 +434,7 @@ function main(): void {
   drawings.set("robotAndMouse", robotAndMouse);
   drawings.set("dinosaurs", dinosaurs);
   drawings.set("particle", particle);
+  drawings.set("gravityParticle", gravityParticle);
 
   new p5(selector);
 }
