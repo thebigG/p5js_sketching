@@ -118,4 +118,12 @@ export class Particle2 {
     this.velocity.addTo(this.gravity);
     this.position.addTo(this.velocity);
   }
+
+  toString() {
+    return `Position: ${this.position.getX().toFixed(2)}, ${this.position
+      .getY()
+      .toFixed(2)} Velocity: ${this.velocity.getX().toFixed(2)}, ${this.velocity
+      .getY()
+      .toFixed(2)}`;
+  }
 }

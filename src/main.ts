@@ -1,6 +1,8 @@
 import p5, { Vector } from "p5";
 import { Particle2, Vector2 } from "./util";
 
+let drawings = new Map<string, (...args: any[]) => any>();
+
 function circle() {
   let canvas_id = "circle";
   var sketch = (p5: p5) => {
@@ -394,7 +396,176 @@ function gravityParticle() {
   return sketch;
 }
 
-let drawings = new Map<string, (...args: any[]) => any>();
+function shipParticle() {
+  let canvas_id = "shipParticle";
+  var sketch = (p5: p5) => {
+    // The sketch setup method
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    let position = new Vector2(50, height);
+    let ship = new Particle2(position, 0, -p5.PI / 2, 0);
+    let thurst = new Vector2(0, 0);
+
+    p5.setup = () => {
+      // Creating and positioning the canvas
+      const canvas = p5.createCanvas(width, height);
+      canvas.id(canvas_id);
+    };
+
+    p5.keyPressed = () => {
+      switch (p5.keyCode) {
+        case p5.UP_ARROW:
+          thurst.setY(-0.1);
+          break;
+        case p5.DOWN_ARROW:
+          thurst.setY(0.1);
+          break;
+        case p5.LEFT_ARROW:
+          thurst.setX(-0.1);
+          break;
+        case p5.RIGHT_ARROW:
+          thurst.setX(0.1);
+          break;
+      }
+    };
+
+    p5.keyReleased = () => {
+      switch (p5.keyCode) {
+        case p5.UP_ARROW:
+          thurst.setY(0);
+          break;
+        case p5.DOWN_ARROW:
+          thurst.setY(0);
+          break;
+        case p5.LEFT_ARROW:
+          thurst.setX(0);
+          break;
+        case p5.RIGHT_ARROW:
+          thurst.setX(0);
+          break;
+      }
+      return false;
+    };
+
+    // The sketch draw method
+    p5.draw = () => {
+      // DEMO: Let the circle instances draw themselves
+      p5.background(204);
+      ship.accelerate(thurst);
+      ship.update();
+      p5.textSize(30);
+      p5.text("Ship: " + ship.toString(), 10, 100);
+      p5.ellipse(ship.position.getX(), ship.position.getY(), 80, 80);
+
+      if (ship.position.getX() > width) {
+        ship.position.setX(0);
+      }
+      if (ship.position.getX() < 0) {
+        ship.position.setX(width);
+      }
+      if (ship.position.getY() > height) {
+        ship.position.setY(0);
+      }
+      if (ship.position.getY() < 0) {
+        ship.position.setY(height);
+      }
+    };
+  };
+
+  return sketch;
+}
+
+function thrustParticle() {
+  let canvas_id = "shipParticle";
+  var sketch = (p5: p5) => {
+    // The sketch setup method
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    let position = new Vector2(width / 2, height / 2);
+    let ship = new Particle2(position, 0, -p5.PI / 2, 0);
+    let thurst = new Vector2(0, 0);
+    let turningLeft = false;
+    let turningRight = false;
+    let thursting = false;
+
+    let angle = 0;
+
+    p5.setup = () => {
+      // Creating and positioning the canvas
+      const canvas = p5.createCanvas(width, height);
+      canvas.id(canvas_id);
+    };
+
+    p5.keyPressed = () => {
+      switch (p5.keyCode) {
+        case p5.UP_ARROW:
+          thursting = true;
+          break;
+        case p5.LEFT_ARROW:
+          turningLeft = true;
+          break;
+        case p5.RIGHT_ARROW:
+          turningRight = true;
+          break;
+      }
+    };
+
+    p5.keyReleased = () => {
+      switch (p5.keyCode) {
+        case p5.UP_ARROW:
+          thursting = false;
+          break;
+        case p5.LEFT_ARROW:
+          turningLeft = false;
+          break;
+        case p5.RIGHT_ARROW:
+          turningRight = false;
+          break;
+      }
+      return false;
+    };
+
+    // The sketch draw method
+    p5.draw = () => {
+      // DEMO: Let the circle instances draw themselves
+      p5.background(204);
+      ship.accelerate(thurst);
+      ship.update();
+      p5.textSize(30);
+      p5.text("Ship: " + ship.toString(), 10, 100);
+      if (turningLeft) {
+        angle -= 0.1;
+      }
+      if (turningRight) {
+        angle += 0.1;
+      }
+      thurst.setAngle(angle);
+      if (thursting) {
+        thurst.setLength(0.1);
+      } else {
+        thurst.setLength(0);
+      }
+      p5.translate(ship.position.getX(), ship.position.getY());
+      p5.rotate(angle);
+      p5.triangle(0, 0, 0, -40, 50, -20);
+
+      if (ship.position.getX() > width) {
+        ship.position.setX(0);
+      }
+      if (ship.position.getX() < 0) {
+        ship.position.setX(width);
+      }
+      if (ship.position.getY() > height) {
+        ship.position.setY(0);
+      }
+      if (ship.position.getY() < 0) {
+        ship.position.setY(height);
+      }
+    };
+  };
+
+  return sketch;
+}
 
 function selector(p: p5) {
   let sel: any;
@@ -435,6 +606,8 @@ function main(): void {
   drawings.set("dinosaurs", dinosaurs);
   drawings.set("particle", particle);
   drawings.set("gravityParticle", gravityParticle);
+  drawings.set("shipParticle", shipParticle);
+  drawings.set("thrustParticle", thrustParticle);
 
   new p5(selector);
 }
