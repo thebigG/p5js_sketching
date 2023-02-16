@@ -483,7 +483,16 @@ function thrustParticle() {
     let height = window.innerHeight;
     let position = new Vector2(width / 2, height / 2);
     let ship = new Particle2(position, 0, -p5.PI / 2, 0);
+
     let thurst = new Vector2(0, 0);
+    let point1 = new Vector2(0, 0);
+    let point2 = new Vector2(0, -40);
+    let point3 = new Vector2(50, -20);
+
+    let point1_offset_x = point1.substract(new Vector2(50, 0));
+    let point2_offset_x = point2.substract(new Vector2(50, 0));
+    let point3_offset_x = point3.substract(new Vector2(50, 0));
+
     let turningLeft = false;
     let turningRight = false;
     let thursting = false;
@@ -547,7 +556,26 @@ function thrustParticle() {
       }
       p5.translate(ship.position.getX(), ship.position.getY());
       p5.rotate(angle);
-      p5.triangle(0, 0, 0, -40, 50, -20);
+      p5.fill("white");
+      p5.triangle(
+        point1.getX(),
+        point1.getY(),
+        point2.getX(),
+        point2.getY(),
+        point3.getX(),
+        point3.getY()
+      );
+
+      if (thursting) {
+        p5.triangle(
+          point1_offset_x.getX(),
+          point1_offset_x.getY(),
+          point2_offset_x.getX(),
+          point2_offset_x.getY(),
+          point3_offset_x.getX(),
+          point3_offset_x.getY()
+        );
+      }
 
       if (ship.position.getX() > width) {
         ship.position.setX(0);
